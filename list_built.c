@@ -19,16 +19,16 @@ int builtins_list(data_of_program *data)
 		{NULL, NULL}
 	};
 
-/*walk through the structure*/
+/*w structure*/
 	for (iterators = 0; options[iterators].builtin != NULL; iterators++)
 	{
-/*if there is a match between the given command and a builtin,*/
+/*ien command and a builtin,*/
 		if (str_compare(options[iterators].builtin, data->command_name, 0))
 		{
-/*execute the function, and return the return value of the function*/
+/*ee return value of the function*/
 			return (options[iterators].function(data));
 		}
-/*if there is no match return -1 */
+/*imatch return -1 */
 	}
 	return (-1);
 }

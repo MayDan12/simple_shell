@@ -13,7 +13,7 @@ int find_program(data_of_program *data)
 	if (!data->command_name)
 		return (2);
 
-	/**if is a full_path or an executable in the same path */
+
 	if (data->command_name[0] == '/' || data->command_name[0] == '.')
 		return (check_file(data->command_name));
 
@@ -22,7 +22,7 @@ int find_program(data_of_program *data)
 	if (!data->tokens[0])
 		return (2);
 
-	director = tokenize_path(data);/* search in the PATH */
+	director = tokenize_path(data);
 
 	if (!director || !director[0])
 	{
@@ -30,11 +30,11 @@ int find_program(data_of_program *data)
 		return (127);
 	}
 	for (li = 0; director[li]; li++)
-	{/* appends the function_name to path */
+	{
 		director[li] = str_concat(director[li], data->tokens[0]);
 		ret_coders = check_file(director[li]);
 		if (ret_coders == 0 || ret_coders == 126)
-		{/* the file was found, is not a directory and has execute permisions*/
+		{
 			errno = 0;
 			free(data->tokens[0]);
 			data->tokens[0] = str_duplicate(director[li]);
@@ -60,26 +60,26 @@ char **tokenize_path(data_of_program *data)
 	char **tokens = NULL;
 	char *PATH;
 
-	/* get the PATH value*/
+
 	PATH = env_get_key("PATH", data);
 	if ((PATH == NULL) || PATH[0] == '\0')
-	{/*path not found*/
+	{
 		return (NULL);
 	}
 
 	PATH = str_duplicate(PATH);
 
-	/* find the number of directories in the PATH */
+
 	for (yi = 0; PATH[yi]; yi++)
 	{
 		if (PATH[yi] == ':')
 			counter_director++;
 	}
 
-	/* reserve space for the array of pointers */
+
 	tokens = malloc(sizeof(char *) * counter_director);
 
-	/*tokenize and duplicate each token of path*/
+
 	yi = 0;
 	tokens[yi] = str_duplicate(_strtok(PATH, ":"));
 	while (tokens[yi++])
@@ -111,7 +111,7 @@ int check_file(char *full_path)
 		}
 		return (0);
 	}
-	/*if not exist the file*/
+
 	errno = 127;
 	return (127);
 }

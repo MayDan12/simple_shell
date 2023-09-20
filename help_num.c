@@ -43,7 +43,7 @@ int _atoi(char *s)
 {
 	int signsed = 1;
 	unsigned int numberwe = 0;
-	/*1- analisys sign*/
+	/*1- sign*/
 	while (!('0' <= *s && *s <= '9') && *s != '\0')
 	{
 		if (*s == '-')
@@ -53,7 +53,7 @@ int _atoi(char *s)
 		s++;
 	}
 
-	/*2 - extract the number */
+	/*2 -mber */
 	while ('0' <= *s && *s <= '9' && *s != '\0')
 	{
 

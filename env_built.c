@@ -10,29 +10,29 @@ int builtin_env(data_of_program *data)
 	char cpnames[50] = {'\0'};
 	char *vars_copy = NULL;
 
-	/* if not arguments */
+	/* guments */
 	if (data->tokens[1] == NULL)
 		print_environ(data);
 	else
 	{
 		for (in = 0; data->tokens[1][in]; in++)
-		{/* checks if exists a char = */
+		{/* chec char = */
 			if (data->tokens[1][in] == '=')
-			{/* checks if exists a var with the same name and change its value*/
-			/* temporally */
+			{/*  and change its value*/
+			/* tally */
 				vars_copy = str_duplicate(env_get_key(cpnames, data));
 				if (vars_copy != NULL)
 					env_set_key(cpnames, data->tokens[1] + in + 1, data);
 
-				/* print the environ */
+				/* prnviron */
 				print_environ(data);
 				if (env_get_key(cpnames, data) == NULL)
-				{/* print the variable if it does not exist in the environ */
+				{/* pnot exist in the environ */
 					_print(data->tokens[1]);
 					_print("\n");
 				}
 				else
-				{/* returns the old value of the var*/
+				{/* ralue of the var*/
 					env_set_key(cpnames, vars_copy, data);
 					free(vars_copy);
 				}
@@ -54,7 +54,7 @@ int builtin_env(data_of_program *data)
  */
 int builtin_set_env(data_of_program *data)
 {
-	/* validate args */
+	/* validate  */
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
 		return (0);
 	if (data->tokens[3] != NULL)
@@ -76,7 +76,7 @@ int builtin_set_env(data_of_program *data)
  */
 int builtin_unset_env(data_of_program *data)
 {
-	/* validate args */
+	/* val args */
 	if (data->tokens[1] == NULL)
 		return (0);
 	if (data->tokens[2] != NULL)

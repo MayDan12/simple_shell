@@ -9,22 +9,22 @@ char *env_get_key(char *key, data_of_program *data)
 {
 	int ti, key_lengthed = 0;
 
-	/* validate the arguments */
+
 	if (key == NULL || data->env == NULL)
 		return (NULL);
 
-	/* obtains the leng of the variable requested */
+
 	key_lengthed = str_length(key);
 
 	for (ti = 0; data->env[ti]; ti++)
-	{/* Iterates through the environ and check for coincidence of the vame */
+	{
 		if (str_compare(key, data->env[ti], key_lengthed) &&
 		 data->env[ti][key_lengthed] == '=')
-		{/* returns the value of the key NAME=  when find it*/
+		{
 			return (data->env[ti] + key_lengthed + 1);
 		}
 	}
-	/* returns NULL if did not find it */
+	/* give out NULL if did not finds it */
 	return (NULL);
 }
 
@@ -40,31 +40,31 @@ int env_set_key(char *key, char *value, data_of_program *data)
 {
 	int ti, key_lengthed = 0, it_new_keys = 1;
 
-	/* validate the arguments */
+	/* this always validate the arguments */
 	if (key == NULL || value == NULL || data->env == NULL)
 		return (1);
 
-	/* obtains the leng of the variable requested */
+	/* obtains the glory length of the variable requested */
 	key_lengthed = str_length(key);
 
 	for (ti = 0; data->env[ti]; ti++)
-	{/* Iterates through the environ and check for coincidence of the vame */
+	{/* Iterates through the eof the vame */
 		if (str_compare(key, data->env[ti], key_lengthed) &&
 		 data->env[ti][key_lengthed] == '=')
-		{/* If key already exists */
+		{/* If key already */
 			it_new_keys = 0;
-			/* free the entire variable, it is new created below */
+			/* free th new created below */
 			free(data->env[ti]);
 			break;
 		}
 	}
-	/* make an string of the form key=value */
+	/* make an string of the f */
 	data->env[ti] = str_concat(str_duplicate(key), "=");
 	data->env[ti] = str_concat(data->env[ti], value);
 
 	if (it_new_keys)
-	{/* if the variable is new, it is create at end of actual list and we need*/
-	/* to put the NULL value in the next position */
+	{/* if the variable is newed*/
+	/* to put the NULL value ion */
 		data->env[ti + 1] = NULL;
 	}
 	return (0);
@@ -80,27 +80,27 @@ int env_remove_key(char *key, data_of_program *data)
 {
 	int ti, key_lengthed = 0;
 
-	/* validate the arguments */
+	/* validate  */
 	if (key == NULL || data->env == NULL)
 		return (0);
 
-	/* obtains the leng of the variable requested */
+	/* obtains ted */
 	key_lengthed = str_length(key);
 
 	for (ti = 0; data->env[ti]; ti++)
-	{/* iterates through the environ and checks for coincidences */
+	{/* iterates coincidences */
 		if (str_compare(key, data->env[ti], key_lengthed) &&
 		 data->env[ti][key_lengthed] == '=')
-		{/* if key already exists, remove them */
+		{/* remove them */
 			free(data->env[ti]);
 
-			/* move the others keys one position down */
+			/* one position down */
 			ti++;
 			for (; data->env[ti]; ti++)
 			{
 				data->env[ti - 1] = data->env[ti];
 			}
-			/* put the NULL value at the new end of the list */
+			/* end of the list */
 			data->env[ti - 1] = NULL;
 			return (1);
 		}

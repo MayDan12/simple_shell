@@ -12,33 +12,33 @@ int _getline(data_of_program *data)
 	static char arrays_operators[10] = {'\0'};
 	ssize_t Readbytes, ig = 0;
 
-	/* check if doesnot exist more commands in the array */
-	/* and checks the logical operators */
+
+
 	if (!arrays_commands[0] || (arrays_operators[0] == '&' && errno != 0) ||
 		(arrays_operators[0] == '|' && errno == 0))
 	{
-		/*free the memory allocated in the array if it exists */
+
 		for (ig = 0; arrays_commands[ig]; ig++)
 		{
 			free(arrays_commands[ig]);
 			arrays_commands[ig] = NULL;
 		}
 
-		/* read from the file descriptor int to buff */
+
 		Readbytes = read(data->file_descriptor, &buffs, BUFFER_SIZE - 1);
 		if (Readbytes == 0)
 			return (-1);
 
-		/* split lines for \n or ; */
+
 		ig = 0;
 		do {
 			arrays_commands[ig] = str_duplicate(_strtok(ig ? NULL : buffs, "\n;"));
-			/*checks and split for && and || operators*/
+
 			ig = check_logic_ops(arrays_commands, ig, arrays_operators);
 		} while (arrays_commands[ig++]);
 	}
 
-	/*obtains the next command (command 0) and remove it for the array*/
+
 	data->input_line = arrays_commands[0];
 	for (ig = 0; arrays_commands[ig]; ig++)
 	{
@@ -62,12 +62,12 @@ int check_logic_ops(char *array_commands[], int i, char array_operators[])
 	char *temps = NULL;
 	int ji;
 
-	/* checks for the & char in the command line*/
+
 	for (ji = 0; array_commands[i] != NULL  && array_commands[i][ji]; ji++)
 	{
 		if (array_commands[i][ji] == '&' && array_commands[i][ji + 1] == '&')
 		{
-			/* split the line when chars && was found */
+
 			temps = array_commands[i];
 			array_commands[i][ji] = '\0';
 			array_commands[i] = str_duplicate(array_commands[i]);
@@ -79,7 +79,7 @@ int check_logic_ops(char *array_commands[], int i, char array_operators[])
 		}
 		if (array_commands[i][ji] == '|' && array_commands[i][ji + 1] == '|')
 		{
-			/* split the line when chars || was found */
+
 			temps = array_commands[i];
 			array_commands[i][ji] = '\0';
 			array_commands[i] = str_duplicate(array_commands[i]);

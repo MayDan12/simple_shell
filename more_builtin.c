@@ -9,11 +9,11 @@ int builtin_exit(data_of_program *data)
 	int hi;
 
 	if (data->tokens[1] != NULL)
-	{/*if exists arg for exit, check if is a number*/
+	{
 		for (hi = 0; data->tokens[1][hi]; hi++)
 			if ((data->tokens[1][hi] < '0' || data->tokens[1][hi] > '9')
 				&& data->tokens[1][hi] != '+')
-			{/*if is not a number*/
+			{
 				errno = 2;
 				return (2);
 			}
@@ -100,7 +100,7 @@ int builtin_help(data_of_program *data)
 
 	mensajes[0] = HELP_MSG;
 
-	/* validate args */
+
 	if (data->tokens[1] == NULL)
 	{
 		_print(mensajes[0] + 6);
@@ -127,7 +127,7 @@ int builtin_help(data_of_program *data)
 			return (1);
 		}
 	}
-	/*if there is no match, print error and return -1 */
+
 	errno = EINVAL;
 	perror(data->command_name);
 	return (0);
@@ -142,12 +142,12 @@ int builtin_alias(data_of_program *data)
 {
 	int ig = 0;
 
-	/* if there are no arguments, print all environment */
+
 	if (data->tokens[1] == NULL)
 		return (print_alias(data, NULL));
 
 	while (data->tokens[++ig])
-	{/* if there are arguments, set or print each env variable*/
+	{
 		if (count_characters(data->tokens[ig], "="))
 			set_alias(data->tokens[ig], data);
 		else

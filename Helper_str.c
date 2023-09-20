@@ -65,7 +65,7 @@ int str_compare(char *string1, char *string2, int number)
 	if (string1 == NULL || string2 == NULL)
 		return (0);
 
-	if (number == 0) /* infinite longitud */
+	if (number == 0) /* tud */
 	{
 		if (str_length(string1) != str_length(string2))
 			return (0);
@@ -76,7 +76,7 @@ int str_compare(char *string1, char *string2, int number)
 		}
 		return (1);
 	}
-	else /* if there is a number of chars to be compared */
+	else /* if there is ared */
 	{
 		for (iterators = 0; iterators < number ; iterators++)
 		{
@@ -114,12 +114,12 @@ char *str_concat(char *string1, char *string2)
 		return (NULL);
 	}
 
-	/* copy of string1 */
+	/* cog1 */
 	for (length2 = 0; string1[length2] != '\0'; length2++)
 		resulte[length2] = string1[length2];
 	free(string1);
 
-	/* copy of string2 */
+	/* coing2 */
 	for (length3 = 0; string2[length3] != '\0'; length3++)
 	{
 		resulte[length3] = string2[length3];

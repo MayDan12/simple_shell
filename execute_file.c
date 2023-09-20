@@ -9,33 +9,33 @@ int execute(data_of_program *data)
 	int retival = 0, statuses;
 	pid_t lospidd;
 
-	/* check for program in built ins */
+	/* ilt ins */
 	retival = builtins_list(data);
-	if (retival != -1)/* if program was found in built ins */
+	if (retival != -1)/* i built ins */
 		return (retival);
 
-	/* check for program file system */
+	/* check f */
 	retival = find_program(data);
 	if (retival)
-	{/* if program not found */
+	{/* if pro */
 		return (retival);
 	}
 	else
-	{/* if program was found */
-		lospidd = fork(); /* create a child process */
+	{/* if prod */
+		lospidd = fork(); /* ocess */
 		if (lospidd == -1)
-		{ /* if the fork call failed */
+		{ /* if the call */
 			perror(data->command_name);
 			exit(100);
 		}
 		if (lospidd == 0)
-		{/* I am the child process, I execute the program*/
+		{/* I am theram*/
 			retival = execve(data->tokens[0], data->tokens, data->env);
-			if (retival == -1) /* if error when execve*/
+			if (retival == -1) /* if ecve*/
 				perror(data->command_name), exit(300);
 		}
 		else
-		{/* I am the father, I wait and check the exit status of the child */
+		{/* I father, I wait and cchild */
 			wait(&statuses);
 			if (WIFEXITED(statuses))
 				errno = WEXITSTATUS(statuses);
