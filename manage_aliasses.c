@@ -54,7 +54,8 @@ char *get_alias(data_of_program *data, char *name)
 
 	for (ir = 0; data->alias_list[ir]; ir++)
 	{/* coincidence of the varname */
-		if (str_compare(name, data->alias_list[ir], alias_lengthed) && data->alias_list[ir][alias_lengthed] == '=')
+		if (str_compare(name, data->alias_list[ir], alias_lengthed) &&
+				data->alias_list[ir][alias_lengthed] == '=')
 		{/* when find it */
 			return (data->alias_list[ir] + alias_lengthed + 1);
 		}
